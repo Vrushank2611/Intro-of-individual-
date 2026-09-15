@@ -1,0 +1,346 @@
+<!doctype html>
+<title>Saket Jha Saurabh</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  :root {
+    --ground: #faf8f3;
+    --paper: #ffffff;
+    --ink: #1d1a15;
+    --ink-soft: #4a4539;
+    --muted: #837c6c;
+    --line: #e5e0d3;
+    --accent: #a9791f;
+    --accent-soft: #f2e6c8;
+    --tag-bg: #f3f0e6;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #17140f;
+      --paper: #1d1a14;
+      --ink: #f1ece0;
+      --ink-soft: #cdc5b3;
+      --muted: #9a8f78;
+      --line: #34301f;
+      --accent: #e0b23f;
+      --accent-soft: #3a3018;
+      --tag-bg: #262114;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #17140f;
+    --paper: #1d1a14;
+    --ink: #f1ece0;
+    --ink-soft: #cdc5b3;
+    --muted: #9a8f78;
+    --line: #34301f;
+    --accent: #e0b23f;
+    --accent-soft: #3a3018;
+    --tag-bg: #262114;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    padding: 32px 16px 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .sheet {
+    width: 100%;
+    max-width: 760px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 40px 48px 34px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 16px;
+  }
+
+  .masthead h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 2.3rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+
+  .role {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .role b { color: var(--ink); font-weight: 600; }
+
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 4px 9px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .lede {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    margin: 14px 0 0;
+    max-width: 62ch;
+    text-wrap: balance;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 28px;
+    margin-top: 26px;
+  }
+
+  h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+
+  .snapshot dl {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .snapshot .row {
+    border-top: 1px solid var(--line);
+    padding-top: 8px;
+  }
+  .snapshot .row:first-child { border-top: none; padding-top: 0; }
+
+  .snapshot dt {
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+
+  .snapshot dd {
+    margin: 0;
+    font-size: 0.86rem;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 22px;
+  }
+
+  .tags span {
+    font-size: 0.72rem;
+    background: var(--tag-bg);
+    color: var(--ink-soft);
+    padding: 4px 9px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stint {
+    display: grid;
+    grid-template-columns: 78px 1fr;
+    gap: 14px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+  }
+  .stint:first-child { border-top: none; padding-top: 0; }
+
+  .stint .years {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    padding-top: 2px;
+    white-space: nowrap;
+  }
+
+  .stint .org {
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--ink);
+  }
+
+  .stint .post {
+    font-size: 0.84rem;
+    color: var(--ink-soft);
+    margin-top: 1px;
+  }
+
+  .stint .note {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  .stint.current .years { color: var(--accent); font-weight: 600; }
+
+  footer {
+    margin-top: 26px;
+    padding-top: 14px;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width: 640px) {
+    .sheet { padding: 26px 20px 24px; }
+    .grid { grid-template-columns: 1fr; }
+    .masthead { flex-direction: column; align-items: flex-start; }
+    .stint { grid-template-columns: 1fr; gap: 2px; }
+    .stint .years { order: -1; }
+  }
+
+  @media print {
+    body { padding: 0; background: var(--paper); }
+    .sheet { box-shadow: none; border: none; max-width: 100%; }
+    @page { size: A4; margin: 14mm; }
+  }
+</style>
+
+<div class="sheet">
+  <div class="masthead">
+    <div>
+      <h1>Saket Jha Saurabh</h1>
+      <p class="role">Ex-<b>Snapchat</b> (Snap Inc.) — Director, Content &amp; Partnerships, India</p>
+    </div>
+    <span class="tag">Prep note</span>
+  </div>
+
+  <p class="lede">20+ years turning platforms into places creators and brands make money — from CNBC-TV18 to Meta to building Snapchat's creator economy in India.</p>
+
+  <div class="grid">
+    <div class="snapshot">
+      <h2>Snapshot</h2>
+      <dl>
+        <div class="row">
+          <dt>Based in</dt>
+          <dd>Mumbai, India</dd>
+        </div>
+        <div class="row">
+          <dt>Experience</dt>
+          <dd>20+ yrs, digital media &amp; platform partnerships</dd>
+        </div>
+        <div class="row">
+          <dt>Education</dt>
+          <dd>MBA — HKUST<br>PGDM (Comms &amp; Brand) — MICA, Ahmedabad</dd>
+        </div>
+        <div class="row">
+          <dt>Known for</dt>
+          <dd>Scaling Snapchat's "Creator Connect" monetization engine in India</dd>
+        </div>
+      </dl>
+      <div class="tags">
+        <span>Creator economy</span>
+        <span>Brand partnerships</span>
+        <span>AR &amp; content</span>
+        <span>Monetization</span>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <h2>Career</h2>
+
+      <div class="stint current">
+        <div class="years">2024–</div>
+        <div>
+          <div class="org">Snap Inc. (Snapchat)</div>
+          <div class="post">Director, Content, Partnerships &amp; AR — India</div>
+          <div class="note">Built "Creator Connect," India's creator-monetization push; led AR &amp; content partnerships.</div>
+        </div>
+      </div>
+
+      <div class="stint">
+        <div class="years">2023–24</div>
+        <div>
+          <div class="org">Independent</div>
+          <div class="post">Strategic advisor</div>
+          <div class="note">Advised consumer-tech &amp; creator-economy startups on growth.</div>
+        </div>
+      </div>
+
+      <div class="stint">
+        <div class="years">~2018–23</div>
+        <div>
+          <div class="org">Meta (Facebook / Instagram)</div>
+          <div class="post">Director &amp; Head, Media Partnerships → Entertainment &amp; Music Partnerships, India</div>
+          <div class="note">Ran platform partnerships across India media, entertainment &amp; music.</div>
+        </div>
+      </div>
+
+      <div class="stint">
+        <div class="years">~2015–18</div>
+        <div>
+          <div class="org">Bloomberg (BloombergQuint)</div>
+          <div class="post">Business Head, Digital</div>
+          <div class="note">Led monetization — branded content &amp; sponsorship strategy.</div>
+        </div>
+      </div>
+
+      <div class="stint">
+        <div class="years">~2007–15</div>
+        <div>
+          <div class="org">Network18</div>
+          <div class="post">GM, Corporate Development; Marketing Head, CNBC-TV18</div>
+          <div class="note">8 years — corporate development &amp; brand marketing.</div>
+        </div>
+      </div>
+
+      <div class="stint">
+        <div class="years">Earlier</div>
+        <div>
+          <div class="org">Fame Digital · India Today Group · Leo Burnett · Wunderman Thompson</div>
+          <div class="post">Early career — media &amp; advertising</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Prepared for Nikhil Kamath</span>
+    <span>Source: LinkedIn — Saket Jha Saurabh</span>
+  </footer>
+</div>
