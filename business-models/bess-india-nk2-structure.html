@@ -338,7 +338,35 @@
     <li><strong>Section 188 related-party approvals</strong> on every VoltZeal–SPV license agreement once under common control — board sign-off each time, audit trail from day one.</li>
   </ul>
 
-  <h2 class="section">04 — Capital stack per site</h2>
+  <h2 class="section">04 — Fixing the risk-reward mismatch: payment waterfall &amp; skin in the game</h2>
+  <p>The dilution firewall above has a side effect if you're not careful: if VoltZeal sells you the container and EMS/BMS as a capital good and invoices its fee on delivery or accrual, it books revenue and is functionally done — while NK² has deployed the ₹8cr of capex and won't see the customer's savings-share for months, or at all if the system underperforms. VoltZeal gets paid regardless of whether the bet pays off. Fixing this needs the same structural instinct as the firewall itself: don't rely on a promise, change where the cash and the risk actually sit.</p>
+
+  <h3>Kill the hardware pass-through</h3>
+  <p>Don't let VoltZeal sell the container to you at all. Buy it directly from Adani, Waaree, or the OEM into the SPV. VoltZeal is a pure software/services counterparty to the SPV — never a capital-goods seller. This removes the one moment where they could book a sale and be done with the relationship.</p>
+
+  <h3>Move the royalty from accrual to cash, and from senior to subordinated</h3>
+  <ul>
+    <li><strong>Pay-when-paid:</strong> VoltZeal invoices its royalty only against cash actually collected from the customer, not the contracted savings estimate. If NK² hasn't been paid, VoltZeal hasn't been paid — the timing risk you flagged disappears by construction.</li>
+    <li><strong>Subordination in the SPV waterfall:</strong> sequence each collection period as (1) senior debt service, (2) NK²'s preferred return on deployed capex, (3) VoltZeal's performance royalty, (4) residual split. A slow-ramping or underperforming site now hits VoltZeal's payment before it hits yours, not the other way round.</li>
+  </ul>
+
+  <h3>Cap any fixed fee to bare opex, and make it a recoupable draw</h3>
+  <p>If VoltZeal needs a minimum retainer to keep support and monitoring staffed, size it to their marginal cost of servicing the fleet only, and net it against future royalty once a site performs. That gives them a working-capital floor without creating a risk-free income stream sitting next to the royalty.</p>
+
+  <h3>Put a commissioning/ramp warranty with real teeth</h3>
+  <p>Define a ramp window (3–6 months per site) during which VoltZeal must tune the system to hit the agreed savings baseline at its own cost. If the site hasn't reached, say, 80% of the contracted target by the end of the window, VoltZeal owes a liquidated-damages payment <em>back</em> to the SPV — a real clawback, not just a forgone royalty.</p>
+
+  <h3>Extend the founders' own earn-out to portfolio-level realized savings</h3>
+  <p>Widen the deferred-consideration metric from the acquisition (Section 02) beyond system uptime to the average realized-savings ratio across the live fleet over the earn-out period. The founders' personal payout for selling the company becomes contingent on customers actually saving money — alignment that reaches the people making product decisions, not just the corporate entity.</p>
+
+  <h3>Strongest version: a genuine, subordinated equity stake</h3>
+  <p>Require a small (2–5%) VoltZeal/founder co-investment into the SPV or Holdco layer, junior to NK²'s equity — a promote-style structure where VoltZeal is paid only after NK²'s capital plus a preferred hurdle is returned. Small dollars, but it converts "exposed to losing a fee" into "exposed to losing capital," and gives them a reason to care about capex and OEM discipline too, not only software performance.</p>
+
+  <div class="callout">
+    <p><strong>Net effect:</strong> VoltZeal's fixed take should be small and reimbursement-only. The bulk of their economics should sit behind NK²'s capital recovery in the waterfall, so a site that under-delivers hurts VoltZeal before it hurts NK² — not after.</p>
+  </div>
+
+  <h2 class="section">05 — Capital stack per site</h2>
   <p>Per 5MWh / 2MW container (~₹8cr), raised entirely at the SPV/Holdco level:</p>
   <table>
     <tr><th>Source</th><th>Share</th><th>Approx.</th><th>Notes</th></tr>
@@ -348,7 +376,7 @@
   </table>
   <p>Once 8–10 sites are stabilized and cash-flowing (12–18 months), securitize the pooled receivables or issue NCDs against them to recycle NK²'s equity check — and evaluate rolling stabilized SPVs into an InvIT-style vehicle later to access permanent, lower-cost capital and scale without re-raising equity site by site.</p>
 
-  <h2 class="section">05 — The customer contract (where the revenue actually gets made)</h2>
+  <h2 class="section">06 — The customer contract (where the revenue actually gets made)</h2>
   <ul>
     <li><strong>Tenor:</strong> 7–10 years, matched to the container's useful life and the project debt tenor.</li>
     <li><strong>Baseline &amp; M&amp;V:</strong> agree the pre-installation power-bill baseline (12 months' history + tariff schedule) upfront, using an IPMVP-style measurement-and-verification protocol — the single biggest source of disputes in ESCO contracts is disagreement over what counts as "savings," so this has to be unambiguous in the contract, not implied.</li>
@@ -358,7 +386,7 @@
     <li><strong>End of term:</strong> customer buyout at depreciated book value, renewal, or NK² redeploys the container to a new site — protects residual asset value.</li>
   </ul>
 
-  <h2 class="section">06 — Regulatory &amp; tax checklist</h2>
+  <h2 class="section">07 — Regulatory &amp; tax checklist</h2>
   <ul>
     <li><strong>Electricity Act / CERC-SERC:</strong> behind-the-meter storage for a customer's own captive load generally needs no generation/distribution license; DAM trading or any grid injection does — confirm state-specific SERC treatment before contracting that lever.</li>
     <li><strong>GST:</strong> structure containers as the SPV's fixed asset so the SPV claims input tax credit on the ~18% GST capex; the opex service fee to the customer is itself a taxable supply — price GST into the contract.</li>
@@ -367,14 +395,14 @@
     <li><strong>FEMA/RBI:</strong> if raising foreign LP capital into Holdco, a SEBI-registered Category II AIF is the cleanest wrapper — pass-through taxation, avoids downstream-investment complications, and power/storage sits on the automatic FDI route regardless.</li>
   </ul>
 
-  <h2 class="section">07 — Governance</h2>
+  <h2 class="section">08 — Governance</h2>
   <ul>
     <li><strong>VoltZeal board:</strong> NK² majority (reflecting 80%) + 1–2 founder seats + one independent technical director; reserved matters (fresh issuance, M&A, related-party contracts, budget above threshold) require founder consent specifically where product/IP is concerned.</li>
     <li><strong>Founder protections:</strong> title and role retention, compensation floor, information rights, tag-along on any future NK² sale of VoltZeal shares to a third party, IP assignment covenant so all post-close EMS/BMS IP sits inside VoltZeal (not a founder side-entity).</li>
     <li><strong>NK² protections:</strong> drag-along for an eventual full platform exit, founder non-compete/non-solicit, key-man insurance on both founders.</li>
   </ul>
 
-  <h2 class="section">08 — Phased roadmap</h2>
+  <h2 class="section">09 — Phased roadmap</h2>
   <div class="phase-grid">
     <div class="phase">
       <div class="p-time">0–3 mo</div>
@@ -394,7 +422,7 @@
     </div>
   </div>
 
-  <h2 class="section">09 — Key risks &amp; mitigants</h2>
+  <h2 class="section">10 — Key risks &amp; mitigants</h2>
   <div class="risk-grid">
     <div class="risk">
       <div class="r-name">Customer credit risk over a 7–10yr opex tail</div>
