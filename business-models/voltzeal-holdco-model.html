@@ -1,0 +1,178 @@
+<!doctype html>
+<title>NK² × VoltZeal — HoldCo Model</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  :root {
+    --ground: #faf8f3; --paper: #ffffff; --ink: #1d1a15; --ink-soft: #4a4539;
+    --muted: #837c6c; --line: #e5e0d3; --accent: #a9791f; --accent-soft: #f2e6c8;
+    --tag-bg: #f3f0e6; --good: #3a6b4f; --good-soft: #e6efe8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#17140f; --paper:#1d1a14; --ink:#f1ece0; --ink-soft:#cdc5b3;
+      --muted:#9a8f78; --line:#34301f; --accent:#e0b23f; --accent-soft:#3a3018;
+      --tag-bg:#262114; --good:#7fbf9c; --good-soft:#1c2b21;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#17140f; --paper:#1d1a14; --ink:#f1ece0; --ink-soft:#cdc5b3;
+    --muted:#9a8f78; --line:#34301f; --accent:#e0b23f; --accent-soft:#3a3018;
+    --tag-bg:#262114; --good:#7fbf9c; --good-soft:#1c2b21;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:'IBM Plex Sans',system-ui,sans-serif; padding:32px 16px 48px; display:flex; justify-content:center; }
+  .sheet { width:100%; max-width:880px; background:var(--paper); border:1px solid var(--line); border-radius:3px; padding:44px 52px 40px; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
+
+  .masthead { display:flex; justify-content:space-between; align-items:flex-end; gap:20px; border-bottom:2px solid var(--ink); padding-bottom:16px; }
+  .masthead h1 { font-family:'Fraunces',Georgia,serif; font-weight:600; font-size:1.9rem; letter-spacing:-0.01em; margin:0 0 6px; text-wrap:balance; }
+  .role { font-size:0.94rem; color:var(--ink-soft); margin:0; }
+  .tag { font-family:'IBM Plex Mono',monospace; font-size:0.64rem; letter-spacing:0.09em; text-transform:uppercase; color:var(--accent); background:var(--accent-soft); padding:4px 9px; border-radius:2px; white-space:nowrap; }
+
+  h2.section { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin:30px 0 4px; padding-top:20px; border-top:1px solid var(--line); page-break-before: always; }
+  h2.section:first-of-type { border-top:none; padding-top:0; margin-top:26px; page-break-before: avoid; }
+  h3.sub { font-family:'Fraunces',Georgia,serif; font-weight:600; font-size:1.15rem; margin:2px 0 12px; color:var(--ink); }
+
+  p { line-height:1.5; font-size:0.88rem; color:var(--ink-soft); margin:6px 0; }
+  ul, ol { margin:6px 0; padding-left:18px; }
+  li { line-height:1.5; font-size:0.88rem; color:var(--ink-soft); margin-bottom:5px; }
+  li strong { color:var(--ink); }
+  li b.founder-note { color: var(--good); }
+
+  .callout { background:var(--accent-soft); border:1px solid var(--line); border-radius:4px; padding:12px 16px; margin:12px 0; }
+  .callout p { color:var(--ink); margin:0; font-size:0.86rem; }
+  .callout.founder { background: var(--good-soft); }
+
+  table { width:100%; border-collapse:collapse; margin:10px 0; font-size:0.82rem; }
+  th, td { text-align:left; padding:6px 9px; border-bottom:1px solid var(--line); color:var(--ink-soft); }
+  th { font-family:'IBM Plex Mono',monospace; font-size:0.62rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--muted); font-weight:500; }
+  td strong { color:var(--ink); }
+  td.num { font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:var(--ink); }
+
+  /* org chart */
+  .chart { display:flex; flex-direction:column; align-items:center; margin:18px 0 10px; }
+  .node { border:1px solid var(--line); border-radius:6px; padding:12px 18px; text-align:center; background:var(--paper); font-size:0.82rem; font-weight:600; color:var(--ink); }
+  .node.top { border-color:var(--accent); border-width:2px; min-width:220px; }
+  .node.mid { min-width:230px; }
+  .node.wide { max-width:640px; width:100%; }
+  .node .sub { display:block; font-size:0.68rem; font-weight:500; color:var(--muted); margin-top:3px; }
+  .node .pct { display:block; font-size:0.7rem; font-weight:500; color:var(--ink-soft); margin-top:6px; font-family:'IBM Plex Mono',monospace; line-height:1.5; }
+  .vline { width:1px; height:20px; background:var(--line); }
+  .row { display:flex; gap:50px; align-items:flex-start; }
+  .branch { display:flex; flex-direction:column; align-items:center; }
+  .hspan { display:flex; align-items:center; }
+  .hspan .hline { height:1px; background:var(--line); width:110px; }
+  .hspan .vstub { width:1px; height:14px; background:var(--line); }
+
+  /* flow steps */
+  .flow { display:flex; flex-direction:column; gap:0; margin:14px 0; }
+  .fstep { display:grid; grid-template-columns:28px 1fr; gap:12px; padding:9px 0; border-top:1px solid var(--line); }
+  .fstep:first-child { border-top:none; }
+  .fstep .num { font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--accent); font-weight:600; }
+  .fstep .txt { font-size:0.86rem; color:var(--ink-soft); }
+  .fstep .txt strong { color:var(--ink); }
+
+  /* waterfall */
+  .waterfall { display:flex; flex-direction:column; gap:6px; margin:14px 0; }
+  .wf { border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:3px; padding:9px 14px; font-size:0.84rem; background:var(--paper); }
+  .wf b { color:var(--ink); }
+  .wf.priority-1 { border-left-color:#7a7a7a; }
+  .wf.priority-2 { border-left-color:var(--accent); }
+  .wf.priority-3 { border-left-color:var(--good); }
+  .wf.priority-4 { border-left-color:var(--good); opacity:0.85; }
+
+  footer { margin-top:26px; padding-top:12px; border-top:2px solid var(--ink); display:flex; justify-content:space-between; gap:12px; font-size:0.68rem; color:var(--muted); font-family:'IBM Plex Mono',monospace; }
+
+  @media print {
+    body { padding:0; background:var(--paper); }
+    .sheet { box-shadow:none; border:none; max-width:100%; }
+    @page { size:A4; margin:14mm; }
+  }
+</style>
+
+<div class="sheet">
+  <div class="masthead">
+    <div>
+      <h1>NK² × VoltZeal — HoldCo Model</h1>
+      <p class="role">Structure, money flow, and the founder case — for discussion with VoltZeal</p>
+    </div>
+    <span class="tag">Structuring memo</span>
+  </div>
+
+  <h2 class="section">01 — Org structure &amp; starting equity</h2>
+  <p>VoltZeal converts into the platform HoldCo. It keeps the EMS/BMS IP and the operating team. A separate capital vehicle funds project equity, so growth capex never dilutes VoltZeal's own cap table.</p>
+
+  <div class="chart">
+    <div class="node top">NK² Squared<br><span class="sub">Sponsor / ultimate parent</span></div>
+    <div class="vline"></div>
+    <div class="row">
+      <div class="branch">
+        <div class="node mid">VoltZeal HoldCo<br><span class="sub">EMS/BMS IP + operating team</span><br><span class="pct">NK²: 26–80%<br>Founders + KMP: remainder</span></div>
+      </div>
+      <div class="branch">
+        <div class="node mid">NK² Platform HoldCo<br><span class="sub">Capital vehicle (AIF-wrapped)</span><br><span class="pct">NK² + co-investors</span></div>
+      </div>
+    </div>
+    <div class="vline"></div>
+    <div class="node wide">Project SPV — one per customer<br><span class="pct">Platform HoldCo: ~80% equity&nbsp;&nbsp;|&nbsp;&nbsp;VoltZeal HoldCo: ~20% promote<br>+ Senior project debt: 65–75% of capex, non-recourse (NBFC/Bank)</span></div>
+  </div>
+
+  <h3 class="sub">Ownership tiers for VoltZeal HoldCo</h3>
+  <table>
+    <tr><th>Tier</th><th>NK²</th><th>Founders + KMP</th><th>What it unlocks</th></tr>
+    <tr><td><strong>Floor</strong></td><td class="num">26%</td><td class="num">74%</td><td>Blocking rights on special resolutions — veto on IP sale, winding up, related-party deals</td></tr>
+    <tr><td><strong>Recommended</strong></td><td class="num">51%</td><td class="num">49%</td><td>Board control, majority director appointment rights</td></tr>
+    <tr><td><strong>Target (phased)</strong></td><td class="num">80%</td><td class="num">20%</td><td>Near-full control; reached via call option over 3–4 yrs, not day one</td></tr>
+  </table>
+  <p>Founders keep CEO/CTO roles and product control at every tier. ESOP refresh pool comes out of NK²'s stake, never the founders'.</p>
+
+  <h2 class="section">02 — Money flow for one new contract</h2>
+  <h3 class="sub">Deployment</h3>
+  <div class="flow">
+    <div class="fstep"><div class="num">1</div><div class="txt">Customer signs ESCO contract. New project SPV incorporated.</div></div>
+    <div class="fstep"><div class="num">2</div><div class="txt"><strong>Debt raised at SPV level</strong> — 65–75% of capex, from an NBFC/bank, secured against the customer receivable + the container itself. Non-recourse to VoltZeal HoldCo and to NK² Squared.</div></div>
+    <div class="fstep"><div class="num">3</div><div class="txt"><strong>Equity raised at SPV level</strong> — Platform HoldCo funds ~80%, VoltZeal HoldCo contributes a small promote stake (~20%) for IP + O&M, not cash.</div></div>
+    <div class="fstep"><div class="num">4</div><div class="txt">SPV buys the container from the OEM (Adani/Waaree/import) and licenses the EMS/BMS from VoltZeal HoldCo.</div></div>
+  </div>
+
+  <h3 class="sub">Ongoing cash — who gets paid, in what order</h3>
+  <div class="waterfall">
+    <div class="wf priority-1"><b>1. Lender</b> — interest + principal on project debt, paid first, every period, from customer's savings-share collections.</div>
+    <div class="wf priority-2"><b>2. VoltZeal HoldCo — license + O&amp;M fee</b> — fixed, small, covers cost of running the system. Paid whether or not the site has hit its savings target yet.</div>
+    <div class="wf priority-3"><b>3. Platform HoldCo — capital return + preferred hurdle</b> — NK²'s equity check comes back first, plus an agreed hurdle rate, before anyone shares in upside.</div>
+    <div class="wf priority-4"><b>4. Residual split</b> — above the hurdle, Platform HoldCo and VoltZeal HoldCo split remaining profit per their SPV equity stake (~80:20).</div>
+  </div>
+  <p>VoltZeal HoldCo's own income = license/O&amp;M fees (all SPVs) + promote distributions (performing SPVs). That income, not project capex, is what eventually reaches VoltZeal HoldCo's own shareholders — NK² Squared and the founders — as dividends.</p>
+
+  <h2 class="section">03 — Why 26%+ in VoltZeal is necessary and fair</h2>
+  <div class="callout founder">
+    <p>This section is written to be shown directly to the VoltZeal founders.</p>
+  </div>
+  <ul>
+    <li><strong>Capital risk needs matching governance.</strong> NK² carries 100% of the capex and credit risk on every site — ₹8–10cr each, dozens of sites. Board rights should track where the risk sits, same as any funding round.</li>
+    <li><strong>26% is a floor, not a power grab.</strong> It's the minimum needed for statutory blocking rights under company law — a veto on things that could put invested capital at risk (IP sale, winding up, related-party deals), not day-to-day control.</li>
+    <li><strong>Future equity value comes from the platform, not the product alone.</strong> VoltZeal's value from here scales with NK²'s capital and customer access, not standalone software sales. A shared cap table reflects where that growth actually comes from.</li>
+    <li><strong>Founders keep operating control.</strong> CEO/CTO roles, product roadmap, majority board seats at the 51% tier — this is a capital and governance split, not a management takeover.</li>
+    <li><b class="founder-note">Founders' realized value can be higher, not lower.</b> Reverse vesting + earn-outs tied to real performance + a fresh ESOP pool funded from NK²'s stake — the platform scaling faster with committed capital can outrun what VoltZeal earns staying independent.</li>
+    <li><strong>This is standard PE/VC practice.</strong> Whoever funds balance-sheet risk gets proportionate governance rights. Nothing about this deal is unusual.</li>
+    <li><strong>The path to 80% is phased, not immediate.</strong> Start at 51%, move to 80% via a pre-agreed call option over 3–4 years — founders see the model work before ceding more.</li>
+  </ul>
+
+  <h2 class="section">04 — If VoltZeal doesn't agree to become the HoldCo</h2>
+  <p>Fallback: keep VoltZeal fully independent, but lock in exclusivity and defensibility contractually.</p>
+  <ol>
+    <li><strong>Take a minority stake instead</strong> — 20–26% of VoltZeal, with a board seat and information rights. No HoldCo conversion.</li>
+    <li><strong>Build NK² Holdco separately</strong> — the original structure: NK² Holdco owns the project SPVs directly; VoltZeal stays outside it.</li>
+    <li><strong>Sign a long-term exclusive supply &amp; license agreement</strong> — VoltZeal sells its EMS/BMS bundle only through NK² in India, for 5–10 years. Make it mutual: NK² commits to minimum deployment volumes in return.</li>
+    <li><strong>Pay for the exclusivity</strong> — upfront fee or guaranteed minimum royalty. Makes it a purchased right, not an unpaid restraint.</li>
+    <li><strong>Escrow the source code</strong> — released to NK² on breach, insolvency, or persistent underperformance.</li>
+    <li><strong>Add personal non-compete/non-solicit on founders</strong> — enforceable for the contract term under Indian law (not beyond it — plan around this limit, don't rely on it alone).</li>
+    <li><strong>Keep a ROFR and a call option</strong> — right to buy more of VoltZeal later, at a pre-agreed formula, if trust builds or VoltZeal's position changes.</li>
+    <li><strong>Build independent moats in parallel</strong> — own the customer contracts, own the fleet performance data, and qualify a second EMS/BMS vendor over the exclusivity term so NK² isn't permanently single-vendor dependent.</li>
+  </ol>
+
+  <footer>
+    <span>Prepared for NK² Squared</span>
+    <span>Structuring memo — not legal, tax or investment advice</span>
+  </footer>
+</div>
